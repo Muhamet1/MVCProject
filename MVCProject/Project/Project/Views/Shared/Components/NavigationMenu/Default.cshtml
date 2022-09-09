@@ -1,0 +1,22 @@
+﻿@model IEnumerable<string>
+
+<ul class="navbar-nav flex-grow-1">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+    </li>
+    @foreach (string category in Model ?? Enumerable.Empty<string>())
+    {
+        <li class="nav">
+            <a class="nav-link text-dark @(category == ViewBag.SelectedCategory ? "btn-primary": "text-secondary")"
+           asp-action="Index" asp-controller="Home"
+           asp-route-category="@category"
+           asp-route-productPage="1">
+                @category
+            </a>
+        </li>
+    }
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </li>
+</ul>
+

@@ -1,0 +1,26 @@
+﻿@model Product
+<div class="col">
+    <div class="card shadow p-3 mb-5 bg-white rounded " style="padding:20px; margin:10px; display:flex; flex-wrap:wrap; width:22rem; height:220px; ">
+       <a asp-controller="Home" asp-action="Details" asp-route-id="@Model?.ProductId" >
+        <img style=" width:130px;" class="card-img-top" src="@Model?.PhotoUrl" />
+        </a>
+        <div class="card-body" style="height:250px;">
+            <h5 class="card-title">@Model?.ProductName</h5>
+            <p style=" text-overflow:ellipsis; overflow:hidden;display:block; white-space:nowrap;width:130px;" class="card-text">@Model?.ProductDescription</p>
+            <p>Cmimi: @Model?.ProductPrice € </p>
+            <a asp-controller="Home" asp-action="Details" asp-route-id="@Model?.ProductId" style="float:left;" class="btn-primary btn btn-sm">Details</a>
+
+            <form id="@Model?.ProductId" asp-page="/Cart" method="post">
+                <input type="hidden" asp-for="ProductId" />
+                <input type="hidden" name="returnUrl"
+                       value="@ViewContext.HttpContext.Request.PathAndQuery()" />
+               
+                     <button type="submit"
+                            class="btn btn-success btn-sm pull-right" style="float:right;">
+                        Add To Cart
+                    </button>
+               
+            </form>
+        </div>
+    </div>
+</div>

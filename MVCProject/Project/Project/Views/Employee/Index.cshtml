@@ -1,0 +1,46 @@
+﻿@model EmployeeListViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="margin:40px;">
+<h1> Employee Manager</h1>
+<partial name="_NavAdminPartial" />
+<p>
+    <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">Create Employee</a>
+</p>
+<table class="table table-hover table-bordered" width="100%">
+    <thead>
+        <tr class="table-dark">
+            <th>Employee Name</th>
+            <th>Employee LastName</th>
+            <th>Employee City</th>
+            <th>Employee Department</th>
+            <th>Employee Wages</th>
+            <th>Options</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var obj in Model?.Employees ?? Enumerable.Empty<Employee>())
+        {
+            <tr>
+                <td>@obj.employeeName</td>
+                <td>@obj.employeeLastName</td>
+                <td>@obj.employeeCity</td>
+                <td>@obj.employeeDepartment</td>
+                <td>@obj.employeeWages</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" asp-controller="Employee" asp-action="Edit" asp-route-id="@obj.employeeId">Edit</a>
+                    <a class="btn btn-info btn-sm" asp-controller="Employee" asp-action="Details" asp-route-id="@obj.employeeId">Details</a>
+                    <a class="btn btn-danger btn-sm" asp-controller="Employee" asp-action="Delete" asp-route-id="@obj.employeeId">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+ <div page-model="@Model?.PagingInfo" page-action="Index" page-classes-enabled="true"
+             page-class="btn" page-class-normal="btn-outline-dark"
+             page-class-selected="btn-primary" class="" style="display:flex; justify-content:center; ">
+        </div>
+
+</div>
