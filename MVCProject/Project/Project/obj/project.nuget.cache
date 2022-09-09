@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "cmo3l8Mx/SVZ5RDuErQHSkP6o+8UHc+1L2wRbr4tkE+MR+jM8BEd3/UFzkfQCaCottjIU28awAImisfrwEgeRA==",
+  "dgSpecHash": "rDYeyrP0VBGxdBTaq+/eicpaCD41pPwDuKn62OirX36wr4DL0XTosazQ3slSyUYGQa2bB6pK+y/0gFW17MxUaA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\.NET-IDENTITY\\Project\\Project\\Project.csproj",
+  "projectFilePath": "C:\\Users\\Admin\\OneDrive\\Desktop\\MVCProject-GitHub\\MVCProject\\MVCProject\\Project\\Project\\Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\cloudinarydotnet\\1.19.0\\cloudinarydotnet.1.19.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
