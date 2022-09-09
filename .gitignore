@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 # My files to ignore
 appsettings.json
+ContextSeed.cs
