@@ -12,6 +12,7 @@ namespace Project.Areas.Identity.Data
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Photo> Photos { get; set; }
-     
+        public DbSet<Order> Orders => Set<Order>();
+
     }
 }

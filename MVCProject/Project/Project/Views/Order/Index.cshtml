@@ -1,0 +1,58 @@
+﻿@model OrderListViewModel
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div style="margin:40px;">
+    <h1> Employee Manager</h1>
+    <partial name="_NavAdminPartial" />
+    <p>
+        <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">Create Employee</a>
+    </p>
+    <table class="table table-hover table-bordered" width="100%">
+        <thead>
+            <tr class="table-dark">
+                <th>Name</th>
+                <th>SurnName</th>
+                <th>Email</th>
+                <th>Telefon Number</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Product</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model?.Orders ?? Enumerable.Empty<Order>())
+            {
+                <tr>
+                    <td>@obj.Name</td>
+                    <td>@obj.SurName</td>
+                    <td>@obj.Email</td>
+                    <td>@obj.TelNumber</td>
+                    <td>@obj.Address</td>
+                    <td>@obj.City</td>
+                    <td>Product</td>
+                </tr>
+
+                @foreach (CartLine line in obj.Lines)
+                {
+                    <tr>
+                        <td colspan="2"></td>
+                        <td>@line.Product.ProductName</td>
+                        <td>@line.Quantity</td>
+                        <td></td>
+                    </tr>
+                }
+            }
+            }else {
+            <tr><td colspan="5" class="text-center">No Orders</td></tr>
+            }
+        </tbody>
+    </table>
+    <div page-model="@Model?.PagingInfo" page-action="Index" page-classes-enabled="true"
+         page-class="btn" page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary" class="" style="display:flex; justify-content:center; ">
+    </div>
+
+</div>
+
