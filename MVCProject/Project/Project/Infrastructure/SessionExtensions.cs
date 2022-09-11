@@ -14,5 +14,6 @@ namespace Project.Infrastructure
             return sessionData == null
             ? default(T) : JsonSerializer.Deserialize<T>(sessionData);
         }
+       
     }
 }
