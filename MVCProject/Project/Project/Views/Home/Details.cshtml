@@ -15,11 +15,12 @@
 
         </div>
         <div class="col-6">
-            <h1>@Html.DisplayFor(model => model.ProductName)</h1>
+            <h2>@Html.DisplayFor(model => model.ProductName)</h2>
             <br />
-            <p>Product Description: @Html.DisplayFor(model=>model.ProductDescription)</p>
-            <p>Product Code:  @Html.DisplayFor(model=> model.ProductCode)</p>
-            <p>Product Price: @Html.DisplayFor(model=> model.ProductPrice)$</p>
+            <p style="font-weight:bold;">Product Description: </p>
+            <p> @Html.DisplayFor(model=>model.ProductDescription)</p>
+            <p style="font-weight:bold;">Product Code: </p> <p>@Html.DisplayFor(model=> model.ProductCode)</p>
+            <h5 class="text-bold">Product Price: </h5> <h5> @Html.DisplayFor(model=> model.ProductPrice)$</h5>
 
             <form id="@Model?.ProductId" asp-page="/Cart" method="post">
                 <input type="hidden" asp-for="ProductId" />

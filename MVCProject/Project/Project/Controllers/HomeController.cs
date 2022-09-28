@@ -20,7 +20,8 @@ namespace Project.Controllers
             _context = ctx;
         }
 
-        public ViewResult Index(string? category, int pageNumber = 1)
+        
+        public ViewResult Index(string? category,string searchString, int pageNumber = 1)
             => View(new ProductsListViewModel
             {
                 Products = _context.Products
@@ -41,6 +42,23 @@ namespace Project.Controllers
 
             });
 
+        
+        public ViewResult Search (string searchString, int pageNumber = 1)
+           => View(new ProductsListViewModel
+           {
+               Products = _context.Products
+               .Where(p => p.ProductName!.Contains(searchString))
+               .OrderBy(p => p.ProductId)
+               .Skip((pageNumber - 1) * pageSize)
+               .Take(pageSize),
+               PagingInfo = new PagingInfo
+               {
+                   CurrentPage = pageNumber,
+                   ItemsPerPage = pageSize,
+               }
+
+           });
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Products == null)
@@ -57,21 +75,18 @@ namespace Project.Controllers
 
             return View(product);
         }
-
-        public async Task<IActionResult> Random()
+        
+        public async Task<IActionResult> SearchString (string searchString)
         {
-            var products =_context.Products;
-            var count = _context.Products.Count();
-            var rand = new Random();
-            var randomProduct = products.Skip(rand.Next(count)).FirstOrDefault();
-            if(randomProduct == null)
+            var products = from m in _context.Products
+                           select m;
+
+            if (!String.IsNullOrEmpty(searchString))
             {
-                return NotFound();
+                products = products.Where(p => p.ProductName.Contains(searchString));
             }
-
-           return View(randomProduct);
-        }     
-
+            return View(await products.ToListAsync());
+        }
 
         public IActionResult Privacy()
         {

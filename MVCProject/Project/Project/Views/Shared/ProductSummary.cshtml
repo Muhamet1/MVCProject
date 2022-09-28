@@ -5,7 +5,7 @@
         <img style=" width:130px;" class="card-img-top" src="@Model?.PhotoUrl" />
         </a>
         <div class="card-body" style="height:250px;width:200px;">
-            <h5 class="card-title">@Model?.ProductName</h5>
+            <h5 class="card-title" style=" text-overflow:ellipsis; overflow:hidden;display:block; white-space:nowrap;width:180px;">@Model?.ProductName</h5>
             <p style=" text-overflow:ellipsis; overflow:hidden;display:block; white-space:nowrap;width:130px;" class="card-text">@Model?.ProductDescription</p>
             <p>Cmimi: @Model?.ProductPrice € </p>
             <form id="@Model?.ProductId" asp-page="/Cart" method="post">

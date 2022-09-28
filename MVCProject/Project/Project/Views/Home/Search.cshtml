@@ -1,0 +1,29 @@
+﻿@model ProductsListViewModel
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+
+
+<div style="margin:-18px;">
+    <img src="~/Image/homebackground.png" style="width:100%;" />
+</div>
+
+<div class="container" style="padding:20px;align-items:center; margin-top:50px;">
+    @if (Model.Products.Count() > 0) { 
+    <div class="row">
+        @foreach (var p in Model?.Products ?? Enumerable.Empty<Product>())
+        {
+            <partial name="ProductSummary" model="p" />
+        }
+    </div>
+}else {
+    <div style="justify-content:center;">
+        <h1>Nuk ka asnje Rezulltat !</h1>
+    </div>
+}
+
+</div>
+
+
