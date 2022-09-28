@@ -4,16 +4,17 @@ using Project.Areas.Identity.Data;
 using Project.Models;
 using System.Diagnostics;
 using Project.Models.ViewModels;
+using System.Linq;
 
 namespace Project.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly ApplicationDbContext _context;
+        private readonly IStoreRepository _context;
         public int pageSize = 6;
 
-        public HomeController(ILogger<HomeController> logger, ApplicationDbContext ctx)
+        public HomeController(ILogger<HomeController> logger, IStoreRepository ctx)
         {
             _logger = logger;
             _context = ctx;
@@ -57,6 +58,19 @@ namespace Project.Controllers
             return View(product);
         }
 
+        public async Task<IActionResult> Random()
+        {
+            var products =_context.Products;
+            var count = _context.Products.Count();
+            var rand = new Random();
+            var randomProduct = products.Skip(rand.Next(count)).FirstOrDefault();
+            if(randomProduct == null)
+            {
+                return NotFound();
+            }
+
+           return View(randomProduct);
+        }     
 
 
         public IActionResult Privacy()

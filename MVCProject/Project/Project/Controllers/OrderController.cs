@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Project.Models;
 using Project.Models.ViewModels;
 
 namespace Project.Controllers
 {
+    [Authorize(Roles = "Basic")]
     public class OrderController : Controller
     {
         private IOrderRepository _context;

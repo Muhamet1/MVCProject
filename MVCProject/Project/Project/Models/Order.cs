@@ -18,15 +18,18 @@ namespace Project.Models
         public string SurName { get; set; }
 
         [MinLength(9)]
+        [Required(ErrorMessage ="Ju lutem shkruani numrin tuaj !")]
         public string TelNumber { get; set; }
 
         [EmailAddress]
+        [Required(ErrorMessage ="Ju lutem shkruani email !")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Ju lutem shkruani addresen tuaj")]
         public string Address { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Ju lutem shkruani qytetin tuaj !")]
+
         public string City { get; set; }
 
     }

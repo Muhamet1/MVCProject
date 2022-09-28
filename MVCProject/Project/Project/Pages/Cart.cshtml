@@ -44,9 +44,9 @@
         </tr>
     </tfoot>
 </table>
-<div class="text-center">
-    <a class="btn btn-primary" href="@Model?.ReturnUrl">Continue shopping</a>
-    <a class="btn btn-success" asp-action="Checkout" asp-controller="Order">
-        Checkout
-    </a>
+<div style="display:flex; flex-direction:row;  justify-content:center;">
+   <h5 ><a class="btn-light btn btn-lg" style="text-decoration: none;" href="@Model?.ReturnUrl"><i class="fas fa-long-arrow-alt-left me-2"></i>Continue shopping</a></h5>
+    <h5><a class="btn btn-primary btn-lg" asp-action="Checkout" asp-controller="Order">
+       Checkout <i class="fas fa-long-arrow-alt-right me-2"></i>
+    </a></h5>
 </div>
