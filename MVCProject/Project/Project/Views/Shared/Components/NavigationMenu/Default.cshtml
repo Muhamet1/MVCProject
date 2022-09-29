@@ -18,13 +18,12 @@
     <li class="nav-item">
         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </li>
-     <li class="nav-item">
-        <form asp-controller="Home" asp-action="Search" method="get">
-            <p>
-                <input type="text"  name="searchString" />
-                <input type="submit" class="btn btn-primary" value="Search" />
-            </p>
+    <li>
+        <form class="input-group" asp-controller="Home" asp-action="Search" method="get">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" name="searchString">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit"><i class="fas fa-search"></i></button>
         </form>
     </li>
 </ul>
- 
+
+

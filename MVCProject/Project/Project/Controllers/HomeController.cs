@@ -12,7 +12,7 @@ namespace Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IStoreRepository _context;
-        public int pageSize = 6;
+        public int pageSize = 9;
 
         public HomeController(ILogger<HomeController> logger, IStoreRepository ctx)
         {
@@ -21,7 +21,7 @@ namespace Project.Controllers
         }
 
         
-        public ViewResult Index(string? category,string searchString, int pageNumber = 1)
+        public ViewResult Index(string? category, int pageNumber = 1)
             => View(new ProductsListViewModel
             {
                 Products = _context.Products
@@ -43,21 +43,21 @@ namespace Project.Controllers
             });
 
         
-        public ViewResult Search (string searchString, int pageNumber = 1)
+        public ViewResult Search (string searchString)
            => View(new ProductsListViewModel
            {
                Products = _context.Products
                .Where(p => p.ProductName!.Contains(searchString))
-               .OrderBy(p => p.ProductId)
-               .Skip((pageNumber - 1) * pageSize)
-               .Take(pageSize),
-               PagingInfo = new PagingInfo
-               {
-                   CurrentPage = pageNumber,
-                   ItemsPerPage = pageSize,
-               }
-
+               .OrderBy(p => p.ProductName)
            });
+
+        public ViewResult FilterByPrice(int priceFrom, int priceTo)
+          => View(new ProductsListViewModel
+          {
+              Products = _context.Products
+              .Where(p => p.ProductPrice >= priceFrom && p.ProductPrice <= priceTo)
+              .OrderBy(p => p.ProductPrice)
+          });
 
         public async Task<IActionResult> Details(int? id)
         {
@@ -75,18 +75,7 @@ namespace Project.Controllers
 
             return View(product);
         }
-        
-        public async Task<IActionResult> SearchString (string searchString)
-        {
-            var products = from m in _context.Products
-                           select m;
-
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                products = products.Where(p => p.ProductName.Contains(searchString));
-            }
-            return View(await products.ToListAsync());
-        }
+       
 
         public IActionResult Privacy()
         {
