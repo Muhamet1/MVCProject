@@ -6,6 +6,10 @@
 <div style="margin:40px;">
     <h1> Orders </h1>
     <partial name="_NavAdminPartial" />
+    <hr />
+    <label>Search Orders: </label>
+     <input type="text" class="form-control mr-sm-2" id="textsearch" placeholder="Enter Order Name .." />
+     <br/>
     <table class="table table-hover table-bordered" width="100%">
         <thead>
             <tr class="table-dark">
@@ -31,18 +35,39 @@
                     <td>@obj.Address</td>
                     <td>@obj.City</td>
                     <td>Product</td>
-               
 
-                @foreach (CartLine line in obj.Lines)
-                {
+
+                    @foreach (CartLine line in obj.Lines)
+                    {
                         <td>@line.Product.ProductName</td>
                         <td>@line.Quantity</td>
-                }
+                    }
                 </tr>
             }
-       
+
         </tbody>
     </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $("#textsearch").on("keyup", function(){
+            var txtenter = $(this).val();
+
+            $("table tr").each(function (results){
+                if(results !== 0 )
+                {
+                    var id = $(this).find("td:nth-child(1)").text();
+                    if(id.indexOf(txtenter) !== 0 && id.toLowerCase().indexOf(txtenter.toLowerCase()) < 0 )
+                    {
+                        $(this).hide();
+                    }
+                    else
+                    {
+                        $(this).show();
+                    }
+                }
+            });
+        });
+    </script>
     <div page-model="@Model?.PagingInfo" page-action="Index" page-classes-enabled="true"
          page-class="btn" page-class-normal="btn-outline-dark"
          page-class-selected="btn-primary" class="" style="display:flex; justify-content:center; ">

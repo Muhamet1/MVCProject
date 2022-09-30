@@ -7,6 +7,10 @@
 <div style="margin:40px;">
 <h1>User Roles</h1>
 <partial name="_NavAdminPartial" />
+<hr />
+<label>Search Users: </label>
+ <input type="text" id="textsearch" class="form-control mr-sm-2 " placeholder="Enter User Name .." />
+ <br />
 <table class="table table-hover table-bordered">
     <thead>
         <tr class="table-dark">
@@ -32,5 +36,26 @@
         }
     </tbody>
 </table>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $("#textsearch").on("keyup", function(){
+        var txtenter = $(this).val();
+
+        $("table tr").each(function (results){
+            if(results !== 0 )
+            {    
+                var id = $(this).find("td:nth-child(1)").text();
+                if(id.indexOf(txtenter) !== 0 && id.toLowerCase().indexOf(txtenter.toLowerCase()) < 0 )
+                {
+                    $(this).hide();
+                }
+                else
+                {
+                    $(this).show();
+                }
+            }
+        });
+    });
+</script>
 
 </div>

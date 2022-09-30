@@ -5,71 +5,97 @@
 }
 
 <div style="margin:40px;">
-<h1>Index</h1>
-<partial name="_NavAdminPartial" />
-<p>
-    <a class="btn btn-primary" asp-action="Create">Create New</a>
-</p>
-<table class="table table-hover table-bordered" width="100%">
-    <thead>
-        <tr class="table-dark">
-            <th>
-                ProductName
-            </th>
-            <th>
-               ProductDescription
-            </th>
-            <th>
-                ProductCode
-            </th>
-            <th>
-               ProductPrice
-            </th>
-            <th>
-               ProductCategory
-            </th>
-            <th>
-                PhotoUrl
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var p in Model?.Products ?? Enumerable.Empty<Product>())
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => p.ProductName)
-                </td>
-                <td style="text-overflow:ellipsis; overflow:hidden;display:block; white-space:nowrap;width:300px;">
-                    @Html.DisplayFor(modelItem => p.ProductDescription)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => p.ProductCode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => p.ProductPrice)
-                </td>
-                   <td>
-                    @Html.DisplayFor(modelItem => p.ProductCategory)
-                </td>
-                <td>
-                    <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="@p.PhotoUrl" />
-                </td>
-                <td>
-
-                    <a class="btn btn-primary btn-sm" asp-controller="Products" asp-action="Edit" asp-route-id="@p.ProductId">Edit</a>
-                    <a class="btn btn-info btn-sm" asp-controller="Products" asp-action="Details" asp-route-id="@p.ProductId">Details</a>
-                    <a class="btn btn-danger btn-sm" asp-controller="Products" asp-action="Delete" asp-route-id="@p.ProductId">Delete</a>
-                </td>
+    <h1>Index</h1>
+    <partial name="_NavAdminPartial" />
+    <p>
+        <a class="btn btn-primary" asp-action="Create">Create New</a>
+    </p>
+    <hr />
+    <label>Search Products: </label>
+    <input type="text" class="form-control mr-sm-2" id="textsearch" placeholder="Enter Product Name .." />
+    <br />
+    <table class="table table-hover table-bordered" width="100%">
+        <thead>
+            <tr class="table-dark">
+                <th>
+                    ProductName
+                </th>
+                <th>
+                    ProductDescription
+                </th>
+                <th>
+                    ProductCode
+                </th>
+                <th>
+                    ProductPrice
+                </th>
+                <th>
+                    ProductCategory
+                </th>
+                <th>
+                    PhotoUrl
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
- <div page-model="@Model?.PagingInfo" page-action="Index" page-classes-enabled="true"
-             page-class="btn" page-class-normal="btn-outline-dark"
-             page-class-selected="btn-primary" class="" style="display:flex; justify-content:center; ">
-        </div>
+        </thead>
+        <tbody>
+            @foreach (var p in Model?.Products ?? Enumerable.Empty<Product>())
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.ProductName)
+                    </td>
+                    <td style="text-overflow:ellipsis; overflow:hidden;display:block; white-space:nowrap;width:300px;">
+                        @Html.DisplayFor(modelItem => p.ProductDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.ProductCode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.ProductPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => p.ProductCategory)
+                    </td>
+                    <td>
+                        <img style="width:40px;height:40px; object-fit:cover; border-radius:30px" src="@p.PhotoUrl" />
+                    </td>
+                    <td>
+
+                        <a class="btn btn-primary btn-sm" asp-controller="Products" asp-action="Edit" asp-route-id="@p.ProductId">Edit</a>
+                        <a class="btn btn-info btn-sm" asp-controller="Products" asp-action="Details" asp-route-id="@p.ProductId">Details</a>
+                        <a class="btn btn-danger btn-sm" asp-controller="Products" asp-action="Delete" asp-route-id="@p.ProductId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script>
+        $("#textsearch").on("keyup", function(){
+            var txtenter = $(this).val();
+
+            $("table tr").each(function (results){
+                if(results !== 0 )
+                {
+                    var id = $(this).find("td:nth-child(1)").text();
+                    if(id.indexOf(txtenter) !== 0 && id.toLowerCase().indexOf(txtenter.toLowerCase()) < 0 )
+                    {
+                        $(this).hide();
+                    }
+                    else
+                    {
+                        $(this).show();
+                    }
+                }
+            });
+        });
+    </script>
+    <div page-model="@Model?.PagingInfo" page-action="Index" page-classes-enabled="true"
+         page-class="btn" page-class-normal="btn-outline-dark"
+         page-class-selected="btn-primary" class="" style="display:flex; justify-content:center; ">
+    </div>
 
 
 </div>
+

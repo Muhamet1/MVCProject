@@ -9,6 +9,10 @@
 <p>
     <a asp-controller="Employee" asp-action="Create" class="btn btn-primary">Create Employee</a>
 </p>
+<hr />
+  <label>Search Employees: </label>
+ <input type="text" id="textsearch" class="form-control mr-sm-2" placeholder="Enter Employee Name .." />
+ <br />
 <table class="table table-hover table-bordered" width="100%">
     <thead>
         <tr class="table-dark">
@@ -38,6 +42,28 @@
         }
     </tbody>
 </table>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script>
+    $("#textsearch").on("keyup", function(){
+        var txtenter = $(this).val();
+
+        $("table tr").each(function (results){
+            if(results !== 0 )
+            {    
+                var id = $(this).find("td:nth-child(1)").text();
+                if(id.indexOf(txtenter) !== 0 && id.toLowerCase().indexOf(txtenter.toLowerCase()) < 0 )
+                {
+                    $(this).hide();
+                }
+                else
+                {
+                    $(this).show();
+                }
+            }
+        });
+    });
+</script>
+
  <div page-model="@Model?.PagingInfo" page-action="Index" page-classes-enabled="true"
              page-class="btn" page-class-normal="btn-outline-dark"
              page-class-selected="btn-primary" class="" style="display:flex; justify-content:center; ">
